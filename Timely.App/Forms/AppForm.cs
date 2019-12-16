@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Timely.App
+namespace Timely.App.Forms
 {
-    public partial class Form1 : Form
+    public partial class AppForm : Form
     {
-        public Form1()
+        public AppForm()
         {
             InitializeComponent();
         }
