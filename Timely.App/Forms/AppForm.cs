@@ -29,9 +29,16 @@ namespace Timely.App.Forms
         {
             var ts = TimeSpan.FromTicks(sw.ElapsedTicks);
             //lblTime.Text = string.Format("{0} : {1} : {2} : {3}", ts.Hours.ToString("00"), ts.Minutes.ToString("00"), ts.Seconds.ToString("00"), ts.Milliseconds.ToString("00"));
-            lblTime.Text = string.Format("{0} : {1} : {2} : {3}", ts.ToString("hh"), ts.ToString("mm"), ts.ToString("ss"), ts.ToString("ff"));
+            //lblTime.Text = string.Format("{0} : {1} : {2} : {3}", ts.ToString("hh"), ts.ToString("mm"), ts.ToString("ss"), ts.ToString("ff"));
 
             //lblTime.Text = ts.ToString("hh\\:mm\\:ss\\:ff");
+
+            var date1 = DateTime.Now;
+            var date2 = DateTime.Now.AddDays(-1);
+
+            var difTicks = date2 - date1;
+            lblTime.Text = string.Format("{0} : {1} : {2} : {3} : {4}", difTicks.ToString("dd"), difTicks.ToString("hh"), difTicks.ToString("mm"), difTicks.ToString("ss"), difTicks.ToString("ff"));
+
         }
     }
 }
