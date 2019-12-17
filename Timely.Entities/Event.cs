@@ -12,5 +12,6 @@ namespace Timely.Entities
         public DateTime StartTime { get; set; }
         public Nullable<DateTime> EndTime { get; set; }
         public int Ticks { get; set; }
+        public EventStatus Status { get; set; }
     }
 }

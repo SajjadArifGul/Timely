@@ -12,7 +12,6 @@ namespace Timely.Entities
         public string Name { get; set; }
         public string Description { get; set; }
         public int TotalTicks { get; set; }
-
-        public List<Event> History { get; set; }
+        public virtual List<Event> EventsHistory { get; set; }
     }
 }
