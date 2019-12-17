@@ -108,10 +108,10 @@
             this.lbTasksList.Margin = new System.Windows.Forms.Padding(4);
             this.lbTasksList.Name = "lbTasksList";
             this.lbTasksList.Size = new System.Drawing.Size(249, 346);
-            this.lbTasksList.Sorted = true;
             this.lbTasksList.TabIndex = 0;
             this.infoToolTip.SetToolTip(this.lbTasksList, "Tasks List");
             this.lbTasksList.SelectedIndexChanged += new System.EventHandler(this.lbTasksList_SelectedIndexChanged);
+            this.lbTasksList.SelectedValueChanged += new System.EventHandler(this.lbTasksList_SelectedIndexChanged);
             // 
             // gbTaskDetailsHolder
             // 
@@ -204,7 +204,6 @@
             this.lblTaskDuration.Name = "lblTaskDuration";
             this.lblTaskDuration.Size = new System.Drawing.Size(418, 20);
             this.lblTaskDuration.TabIndex = 9;
-            this.lblTaskDuration.Text = "0 Days, 3 Hours, 7 Minutes, 34 Seconds";
             this.lblTaskDuration.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.infoToolTip.SetToolTip(this.lblTaskDuration, "Total Duration of Task");
             // 
@@ -312,7 +311,9 @@
             this.Controls.Add(this.gbxTasksHolder);
             this.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);
+            this.MinimumSize = new System.Drawing.Size(862, 482);
             this.Name = "TasksForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TasksForm";
             this.Load += new System.EventHandler(this.TasksForm_Load);
             this.gbxTasksHolder.ResumeLayout(false);

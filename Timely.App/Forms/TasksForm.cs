@@ -37,6 +37,14 @@ namespace Timely.App.Forms
             {
                 lbTasksList.SelectedItem = task;
             }
+            else
+            {
+                if(allTasks != null && allTasks.Count > 0)
+                {
+                    lbTasksList.SelectedItem = allTasks.FirstOrDefault();
+                }
+                else gbTaskDetailsHolder.Enabled = false;
+            }
         }
 
         private void btnAddNewTask_Click(object sender, EventArgs e)
@@ -74,6 +82,12 @@ namespace Timely.App.Forms
                 SelectedTask = selectedTask;
 
                 LoadTaskDetails(SelectedTask);
+
+                gbTaskDetailsHolder.Enabled = true;
+            }
+            else
+            {
+                gbTaskDetailsHolder.Enabled = false;
             }
         }
 
@@ -81,6 +95,36 @@ namespace Timely.App.Forms
         {
             txtTaskName.Text = task.Name;
             txtTaskDescription.Text = task.Description;
+
+            var taskHistory = task.EventsHistory != null ? task.EventsHistory.OrderByDescending(x => x.StartTime).ToList() : new List<Entities.Event>();
+
+            var ts = TimeSpan.FromTicks(taskHistory.Sum(x => x.Ticks));
+
+            if (ts.Ticks > 0)
+            {
+                lblTaskDuration.Text = string.Format("{0} Days, {1} Hours, {2} Minutes, {3} Seconds", ts.ToString("dd"), ts.ToString("hh"), ts.ToString("mm"), ts.ToString("ss"));
+            }
+            else
+            {
+                lblTaskDuration.Text = "No time";
+            }
+
+            lbTaskEventsHistory.DataSource = taskHistory;
+            lbTaskEventsHistory.DisplayMember = "StartTime";
+            lbTaskEventsHistory.ValueMember = "ID";
+
+            if (taskHistory != null && taskHistory.Count > 0)
+            {
+                lbTaskEventsHistory.Enabled = true;
+                btnDeleteEvent.Enabled = true;
+
+                lbTaskEventsHistory.SelectedItem = taskHistory.FirstOrDefault();
+            }
+            else
+            {
+                lbTaskEventsHistory.Enabled = false;
+                btnDeleteEvent.Enabled = false;
+            }
         }
 
         private void btnUpdateTask_Click(object sender, EventArgs e)
@@ -140,6 +184,8 @@ namespace Timely.App.Forms
                 {
                     if (ShowSuccessMessage("Task deleted.") == DialogResult.OK)
                     {
+                        txtTaskName.Clear();
+
                         //Load Tasks again
                         LoadTasks();
                     }
