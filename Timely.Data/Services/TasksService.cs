@@ -50,9 +50,16 @@ namespace Timely.Data.Services
 
         public bool UpdateTask(Entities.Task task)
         {
-            context.Entry(task).State = System.Data.Entity.EntityState.Modified;
+            using (var newContext = new TimelyContext())
+            {
+                var dbTask = newContext.Tasks.Find(task.ID);
 
-            return context.SaveChanges() > 0;
+                newContext.Entry(dbTask).CurrentValues.SetValues(task);
+
+                //newContext.Entry(task).State = System.Data.Entity.EntityState.Modified;
+
+                return newContext.SaveChanges() > 0;
+            }
         }
 
         public bool DeleteTask(Entities.Task task)

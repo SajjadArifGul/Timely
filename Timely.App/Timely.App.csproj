@@ -98,5 +98,15 @@
   <ItemGroup>
     <None Include="Resources\appbar.close.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Timely.Data\Timely.Data.csproj">
+      <Project>{d8d99ee9-e38f-466b-a077-8bbb71411fbb}</Project>
+      <Name>Timely.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Timely.Entities\Timely.Entities.csproj">
+      <Project>{aa4cd350-5a3d-4bd2-a496-5d98705bd619}</Project>
+      <Name>Timely.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
