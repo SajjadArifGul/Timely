@@ -82,6 +82,7 @@
             this.btnResumeEvent.Size = new System.Drawing.Size(35, 35);
             this.btnResumeEvent.TabIndex = 17;
             this.btnResumeEvent.UseVisualStyleBackColor = false;
+            this.btnResumeEvent.Click += new System.EventHandler(this.btnResumeEvent_Click);
             // 
             // btnStopEvent
             // 
@@ -97,6 +98,7 @@
             this.btnStopEvent.Size = new System.Drawing.Size(35, 35);
             this.btnStopEvent.TabIndex = 16;
             this.btnStopEvent.UseVisualStyleBackColor = false;
+            this.btnStopEvent.Click += new System.EventHandler(this.btnStopEvent_Click);
             // 
             // btnDeleteEvent
             // 
@@ -113,6 +115,7 @@
             this.btnDeleteEvent.Size = new System.Drawing.Size(35, 35);
             this.btnDeleteEvent.TabIndex = 15;
             this.btnDeleteEvent.UseVisualStyleBackColor = false;
+            this.btnDeleteEvent.Click += new System.EventHandler(this.btnDeleteEvent_Click);
             // 
             // EventForm
             // 

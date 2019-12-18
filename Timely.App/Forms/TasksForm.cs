@@ -18,11 +18,28 @@ namespace Timely.App.Forms
         private Entities.Task SelectedTask = null;
         private Entities.Event SelectedEvent = null;
 
-        public TasksForm()
+        #region Define as Singleton
+        private static TasksForm _Instance;
+
+        public static TasksForm Instance
+        {
+            get
+            {
+                if (_Instance == null)
+                {
+                    _Instance = new TasksForm();
+                }
+
+                return (_Instance);
+            }
+        }
+
+        private TasksForm()
         {
             InitializeComponent();
             this.Icon = new Icon("Resources/timely-icon.ico");
         }
+        #endregion
 
         private void TasksForm_Load(object sender, EventArgs e)
         {
@@ -31,7 +48,7 @@ namespace Timely.App.Forms
             AppTimer.Start();
         }
 
-        private void LoadTasks(Entities.Task task = null)
+        protected internal void LoadTasks(Entities.Task task = null)
         {
             var allTasks = TasksService.Instance.GetAll();
 
@@ -104,9 +121,7 @@ namespace Timely.App.Forms
 
             var taskHistory = task.EventsHistory != null ? task.EventsHistory.OrderByDescending(x => x.StartTime).ToList() : new List<Entities.Event>();
 
-            var ts = TimeSpan.FromTicks(taskHistory.Sum(x => x.Ticks));
-
-            lblTaskDuration.Text = ts.ToTimelyStandard().IfNullOrEmptyShowAlternative("-");
+            lblTaskDuration.Text = string.Empty;
 
             lbTaskEventsHistory.DataSource = taskHistory;
             lbTaskEventsHistory.DisplayMember = "StartTime";
@@ -156,17 +171,17 @@ namespace Timely.App.Forms
             }
         }
 
-        private DialogResult ShowErrorMessage(string message)
+        protected internal DialogResult ShowErrorMessage(string message)
         {
             return MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private DialogResult ShowSuccessMessage(string message)
+        protected internal DialogResult ShowSuccessMessage(string message)
         {
             return MessageBox.Show(message, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private DialogResult ShowConfirmMessage(string message)
+        protected internal DialogResult ShowConfirmMessage(string message)
         {
             return MessageBox.Show(message, "Confirm", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
         }
@@ -241,9 +256,17 @@ namespace Timely.App.Forms
         
         private void AppTimer_Tick(object sender, EventArgs e)
         {
-            if(SelectedEvent != null && SelectedEvent.Status == Entities.EventStatus.Started)
+            if(SelectedTask != null)
             {
-                var ts = DateTime.Now - SelectedEvent.StartTime;
+                var sumOfTicksOfStoppedEvents = SelectedTask.EventsHistory == null ? 0 : SelectedTask.EventsHistory.Where(x => x.Status == Entities.EventStatus.Stopped && x.EndTime.HasValue).Select(x => (x.EndTime.Value - x.StartTime).Ticks).Sum();
+                
+                ///Ideally we shouldn't have more than one event with status = Started.
+                ///One man can work on one issue of task at a time
+                ///but lets just say someone is as much a multitasker as I am :p
+                var sumOfTicksOfStartedEvents = SelectedTask.EventsHistory == null ? 0 : SelectedTask.EventsHistory.Where(x => x.Status == Entities.EventStatus.Started).Select(x => (DateTime.Now - x.StartTime).Ticks).Sum();
+
+                var ts = TimeSpan.FromTicks(sumOfTicksOfStoppedEvents + sumOfTicksOfStartedEvents);
+
                 lblTaskDuration.Text = ts.ToTimelyStandard().IfNullOrEmptyShowAlternative("-");
             }
         }

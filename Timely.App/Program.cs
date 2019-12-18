@@ -17,7 +17,7 @@ namespace Timely.App
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new TasksForm());
+            Application.Run(TasksForm.Instance);
         }
     }
 }
