@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -63,7 +64,7 @@ namespace Timely.Data.Services
 
         public bool DeleteEvent(Entities.Event _event)
         {
-            context.Entry(_event).State = System.Data.Entity.EntityState.Deleted;
+            context.Entry(_event).State = EntityState.Deleted;
 
             return context.SaveChanges() > 0;
         }

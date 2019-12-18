@@ -58,6 +58,8 @@ namespace Timely.App.Forms
 
             if(task != null)
             {
+                task = allTasks.FirstOrDefault(x => x.ID == task.ID);
+
                 lbTasksList.SelectedItem = task;
             }
             else
@@ -218,12 +220,12 @@ namespace Timely.App.Forms
         {
             var newEvent = new Entities.Event() { TaskID = SelectedTask.ID, StartTime = DateTime.Now, Status = Entities.EventStatus.Started };
 
-            if(SelectedTask.EventsHistory == null)
-            {
-                SelectedTask.EventsHistory = new List<Entities.Event>();
-            }
+            //if(SelectedTask.EventsHistory == null)
+            //{
+            //    SelectedTask.EventsHistory = new List<Entities.Event>();
+            //}
 
-            SelectedTask.EventsHistory.Add(newEvent);
+            //SelectedTask.EventsHistory.Add(newEvent);
             
             var result = EventsService.Instance.SaveEvent(newEvent);
 
@@ -279,6 +281,29 @@ namespace Timely.App.Forms
             {
                 var eventForm = new EventForm(selectedEvent);
                 eventForm.Show();
+            }
+        }
+
+        private void btnDeleteEvent_Click(object sender, EventArgs e)
+        {
+            var selectedEvent = (Entities.Event)lbTaskEventsHistory.SelectedItem;
+
+            if (selectedEvent != null && ShowConfirmMessage("Are you sure you want to delete this event?") == DialogResult.OK)
+            {
+                selectedEvent.Status = Entities.EventStatus.Stopped;
+                selectedEvent.EndTime = DateTime.Now;
+
+                var result = EventsService.Instance.DeleteEvent(selectedEvent);
+
+                if (!result)
+                {
+                    ShowErrorMessage("Unable to delete event.");
+                }
+                else
+                {
+                    //Load Tasks again
+                    LoadTasks(SelectedTask);
+                }
             }
         }
     }

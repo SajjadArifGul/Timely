@@ -34,7 +34,9 @@ namespace Timely.Data.Services
 
         public List<Entities.Task> GetAll()
         {
-            return context.Tasks.Include("EventsHistory").OrderByDescending(x => x.CreatedOn).ToList();
+            context = new TimelyContext();
+
+            return context.Tasks.OrderByDescending(x => x.CreatedOn).ToList();
         }
 
         public Entities.Task GetTaskByID(int ID)
