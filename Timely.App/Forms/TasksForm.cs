@@ -21,6 +21,7 @@ namespace Timely.App.Forms
         public TasksForm()
         {
             InitializeComponent();
+            this.Icon = new Icon("Resources/timely-icon.ico");
         }
 
         private void TasksForm_Load(object sender, EventArgs e)

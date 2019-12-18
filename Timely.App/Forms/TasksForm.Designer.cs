@@ -1,4 +1,6 @@
-﻿namespace Timely.App.Forms
+﻿using System.Drawing;
+
+namespace Timely.App.Forms
 {
     partial class TasksForm
     {
@@ -29,26 +31,27 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TasksForm));
             this.gbxTasksHolder = new System.Windows.Forms.GroupBox();
-            this.btnAddNewTask = new System.Windows.Forms.Button();
             this.txtNewTaskName = new System.Windows.Forms.TextBox();
             this.lbTasksList = new System.Windows.Forms.ListBox();
             this.gbTaskDetailsHolder = new System.Windows.Forms.GroupBox();
-            this.btnStartNewEvent = new System.Windows.Forms.Button();
-            this.btnDeleteEvent = new System.Windows.Forms.Button();
             this.lbTaskEventsHistory = new System.Windows.Forms.ListBox();
             this.label5 = new System.Windows.Forms.Label();
             this.lblTaskDuration = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
-            this.btnDeleteTask = new System.Windows.Forms.Button();
-            this.btnUpdateTask = new System.Windows.Forms.Button();
             this.txtTaskDescription = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txtTaskName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.infoToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.AppTimer = new System.Windows.Forms.Timer(this.components);
+            this.btnStartNewEvent = new System.Windows.Forms.Button();
+            this.btnDeleteEvent = new System.Windows.Forms.Button();
+            this.btnDeleteTask = new System.Windows.Forms.Button();
+            this.btnUpdateTask = new System.Windows.Forms.Button();
+            this.btnAddNewTask = new System.Windows.Forms.Button();
             this.gbxTasksHolder.SuspendLayout();
             this.gbTaskDetailsHolder.SuspendLayout();
             this.SuspendLayout();
@@ -69,23 +72,6 @@
             this.gbxTasksHolder.TabIndex = 0;
             this.gbxTasksHolder.TabStop = false;
             this.gbxTasksHolder.Text = "Tasks";
-            // 
-            // btnAddNewTask
-            // 
-            this.btnAddNewTask.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddNewTask.BackColor = System.Drawing.Color.LimeGreen;
-            this.btnAddNewTask.BackgroundImage = global::Timely.App.Properties.Resources.appbar_list_star;
-            this.btnAddNewTask.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnAddNewTask.FlatAppearance.BorderColor = System.Drawing.Color.LimeGreen;
-            this.btnAddNewTask.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddNewTask.Location = new System.Drawing.Point(222, 26);
-            this.btnAddNewTask.Margin = new System.Windows.Forms.Padding(4);
-            this.btnAddNewTask.Name = "btnAddNewTask";
-            this.btnAddNewTask.Size = new System.Drawing.Size(35, 35);
-            this.btnAddNewTask.TabIndex = 2;
-            this.infoToolTip.SetToolTip(this.btnAddNewTask, "Add New Task");
-            this.btnAddNewTask.UseVisualStyleBackColor = false;
-            this.btnAddNewTask.Click += new System.EventHandler(this.btnAddNewTask_Click);
             // 
             // txtNewTaskName
             // 
@@ -143,40 +129,6 @@
             this.gbTaskDetailsHolder.TabStop = false;
             this.gbTaskDetailsHolder.Text = "Details";
             // 
-            // btnStartNewEvent
-            // 
-            this.btnStartNewEvent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnStartNewEvent.BackColor = System.Drawing.Color.LimeGreen;
-            this.btnStartNewEvent.BackgroundImage = global::Timely.App.Properties.Resources.appbar_timer_check;
-            this.btnStartNewEvent.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnStartNewEvent.FlatAppearance.BorderColor = System.Drawing.Color.LimeGreen;
-            this.btnStartNewEvent.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnStartNewEvent.Location = new System.Drawing.Point(497, 367);
-            this.btnStartNewEvent.Margin = new System.Windows.Forms.Padding(4);
-            this.btnStartNewEvent.Name = "btnStartNewEvent";
-            this.btnStartNewEvent.Size = new System.Drawing.Size(35, 35);
-            this.btnStartNewEvent.TabIndex = 14;
-            this.infoToolTip.SetToolTip(this.btnStartNewEvent, "Start New Event");
-            this.btnStartNewEvent.UseVisualStyleBackColor = false;
-            this.btnStartNewEvent.Click += new System.EventHandler(this.btnStartNewEvent_Click);
-            // 
-            // btnDeleteEvent
-            // 
-            this.btnDeleteEvent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDeleteEvent.BackColor = System.Drawing.Color.Salmon;
-            this.btnDeleteEvent.BackgroundImage = global::Timely.App.Properties.Resources.appbar_timer_rewind;
-            this.btnDeleteEvent.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnDeleteEvent.Enabled = false;
-            this.btnDeleteEvent.FlatAppearance.BorderColor = System.Drawing.Color.Salmon;
-            this.btnDeleteEvent.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDeleteEvent.Location = new System.Drawing.Point(454, 367);
-            this.btnDeleteEvent.Margin = new System.Windows.Forms.Padding(4);
-            this.btnDeleteEvent.Name = "btnDeleteEvent";
-            this.btnDeleteEvent.Size = new System.Drawing.Size(35, 35);
-            this.btnDeleteEvent.TabIndex = 13;
-            this.infoToolTip.SetToolTip(this.btnDeleteEvent, "Delete Selected Event");
-            this.btnDeleteEvent.UseVisualStyleBackColor = false;
-            // 
             // lbTaskEventsHistory
             // 
             this.lbTaskEventsHistory.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -233,40 +185,6 @@
             this.label3.Text = "Total Duration";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // btnDeleteTask
-            // 
-            this.btnDeleteTask.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDeleteTask.BackColor = System.Drawing.Color.Salmon;
-            this.btnDeleteTask.BackgroundImage = global::Timely.App.Properties.Resources.appbar_delete;
-            this.btnDeleteTask.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnDeleteTask.FlatAppearance.BorderColor = System.Drawing.Color.Salmon;
-            this.btnDeleteTask.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDeleteTask.Location = new System.Drawing.Point(454, 92);
-            this.btnDeleteTask.Margin = new System.Windows.Forms.Padding(4);
-            this.btnDeleteTask.Name = "btnDeleteTask";
-            this.btnDeleteTask.Size = new System.Drawing.Size(35, 35);
-            this.btnDeleteTask.TabIndex = 6;
-            this.infoToolTip.SetToolTip(this.btnDeleteTask, "Delete Task");
-            this.btnDeleteTask.UseVisualStyleBackColor = false;
-            this.btnDeleteTask.Click += new System.EventHandler(this.btnDeleteTask_Click);
-            // 
-            // btnUpdateTask
-            // 
-            this.btnUpdateTask.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnUpdateTask.BackColor = System.Drawing.Color.LimeGreen;
-            this.btnUpdateTask.BackgroundImage = global::Timely.App.Properties.Resources.appbar_list_create;
-            this.btnUpdateTask.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnUpdateTask.FlatAppearance.BorderColor = System.Drawing.Color.LimeGreen;
-            this.btnUpdateTask.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUpdateTask.Location = new System.Drawing.Point(497, 92);
-            this.btnUpdateTask.Margin = new System.Windows.Forms.Padding(4);
-            this.btnUpdateTask.Name = "btnUpdateTask";
-            this.btnUpdateTask.Size = new System.Drawing.Size(35, 35);
-            this.btnUpdateTask.TabIndex = 5;
-            this.infoToolTip.SetToolTip(this.btnUpdateTask, "Update Task Info");
-            this.btnUpdateTask.UseVisualStyleBackColor = false;
-            this.btnUpdateTask.Click += new System.EventHandler(this.btnUpdateTask_Click);
-            // 
             // txtTaskDescription
             // 
             this.txtTaskDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -312,6 +230,91 @@
             this.AppTimer.Interval = 10;
             this.AppTimer.Tick += new System.EventHandler(this.AppTimer_Tick);
             // 
+            // btnStartNewEvent
+            // 
+            this.btnStartNewEvent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnStartNewEvent.BackColor = System.Drawing.Color.LimeGreen;
+            this.btnStartNewEvent.BackgroundImage = global::Timely.App.Properties.Resources.appbar_timer_check;
+            this.btnStartNewEvent.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnStartNewEvent.FlatAppearance.BorderColor = System.Drawing.Color.LimeGreen;
+            this.btnStartNewEvent.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnStartNewEvent.Location = new System.Drawing.Point(497, 367);
+            this.btnStartNewEvent.Margin = new System.Windows.Forms.Padding(4);
+            this.btnStartNewEvent.Name = "btnStartNewEvent";
+            this.btnStartNewEvent.Size = new System.Drawing.Size(35, 35);
+            this.btnStartNewEvent.TabIndex = 14;
+            this.infoToolTip.SetToolTip(this.btnStartNewEvent, "Start New Event");
+            this.btnStartNewEvent.UseVisualStyleBackColor = false;
+            this.btnStartNewEvent.Click += new System.EventHandler(this.btnStartNewEvent_Click);
+            // 
+            // btnDeleteEvent
+            // 
+            this.btnDeleteEvent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDeleteEvent.BackColor = System.Drawing.Color.Salmon;
+            this.btnDeleteEvent.BackgroundImage = global::Timely.App.Properties.Resources.appbar_timer_rewind;
+            this.btnDeleteEvent.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnDeleteEvent.Enabled = false;
+            this.btnDeleteEvent.FlatAppearance.BorderColor = System.Drawing.Color.Salmon;
+            this.btnDeleteEvent.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDeleteEvent.Location = new System.Drawing.Point(454, 367);
+            this.btnDeleteEvent.Margin = new System.Windows.Forms.Padding(4);
+            this.btnDeleteEvent.Name = "btnDeleteEvent";
+            this.btnDeleteEvent.Size = new System.Drawing.Size(35, 35);
+            this.btnDeleteEvent.TabIndex = 13;
+            this.infoToolTip.SetToolTip(this.btnDeleteEvent, "Delete Selected Event");
+            this.btnDeleteEvent.UseVisualStyleBackColor = false;
+            // 
+            // btnDeleteTask
+            // 
+            this.btnDeleteTask.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDeleteTask.BackColor = System.Drawing.Color.Salmon;
+            this.btnDeleteTask.BackgroundImage = global::Timely.App.Properties.Resources.appbar_delete;
+            this.btnDeleteTask.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnDeleteTask.FlatAppearance.BorderColor = System.Drawing.Color.Salmon;
+            this.btnDeleteTask.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDeleteTask.Location = new System.Drawing.Point(454, 92);
+            this.btnDeleteTask.Margin = new System.Windows.Forms.Padding(4);
+            this.btnDeleteTask.Name = "btnDeleteTask";
+            this.btnDeleteTask.Size = new System.Drawing.Size(35, 35);
+            this.btnDeleteTask.TabIndex = 6;
+            this.infoToolTip.SetToolTip(this.btnDeleteTask, "Delete Task");
+            this.btnDeleteTask.UseVisualStyleBackColor = false;
+            this.btnDeleteTask.Click += new System.EventHandler(this.btnDeleteTask_Click);
+            // 
+            // btnUpdateTask
+            // 
+            this.btnUpdateTask.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnUpdateTask.BackColor = System.Drawing.Color.LimeGreen;
+            this.btnUpdateTask.BackgroundImage = global::Timely.App.Properties.Resources.appbar_list_create;
+            this.btnUpdateTask.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnUpdateTask.FlatAppearance.BorderColor = System.Drawing.Color.LimeGreen;
+            this.btnUpdateTask.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUpdateTask.Location = new System.Drawing.Point(497, 92);
+            this.btnUpdateTask.Margin = new System.Windows.Forms.Padding(4);
+            this.btnUpdateTask.Name = "btnUpdateTask";
+            this.btnUpdateTask.Size = new System.Drawing.Size(35, 35);
+            this.btnUpdateTask.TabIndex = 5;
+            this.infoToolTip.SetToolTip(this.btnUpdateTask, "Update Task Info");
+            this.btnUpdateTask.UseVisualStyleBackColor = false;
+            this.btnUpdateTask.Click += new System.EventHandler(this.btnUpdateTask_Click);
+            // 
+            // btnAddNewTask
+            // 
+            this.btnAddNewTask.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddNewTask.BackColor = System.Drawing.Color.LimeGreen;
+            this.btnAddNewTask.BackgroundImage = global::Timely.App.Properties.Resources.appbar_list_star;
+            this.btnAddNewTask.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnAddNewTask.FlatAppearance.BorderColor = System.Drawing.Color.LimeGreen;
+            this.btnAddNewTask.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddNewTask.Location = new System.Drawing.Point(222, 26);
+            this.btnAddNewTask.Margin = new System.Windows.Forms.Padding(4);
+            this.btnAddNewTask.Name = "btnAddNewTask";
+            this.btnAddNewTask.Size = new System.Drawing.Size(35, 35);
+            this.btnAddNewTask.TabIndex = 2;
+            this.infoToolTip.SetToolTip(this.btnAddNewTask, "Add New Task");
+            this.btnAddNewTask.UseVisualStyleBackColor = false;
+            this.btnAddNewTask.Click += new System.EventHandler(this.btnAddNewTask_Click);
+            // 
             // TasksForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
@@ -321,11 +324,12 @@
             this.Controls.Add(this.gbTaskDetailsHolder);
             this.Controls.Add(this.gbxTasksHolder);
             this.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MinimumSize = new System.Drawing.Size(862, 482);
             this.Name = "TasksForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "TasksForm";
+            this.Text = "Timely - Time Tracking";
             this.Load += new System.EventHandler(this.TasksForm_Load);
             this.gbxTasksHolder.ResumeLayout(false);
             this.gbxTasksHolder.PerformLayout();

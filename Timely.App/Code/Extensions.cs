@@ -10,12 +10,44 @@ namespace Timely.App.Code
     {
         public static string ToTimelyStandard(this TimeSpan ts)
         {
-            return ts == null || ts.Ticks == 0 ? string.Empty : string.Format("{0} Days, {1} Hours, {2} Minutes, {3} Seconds", ts.ToString("dd"), ts.ToString("hh"), ts.ToString("mm"), ts.ToString("ss"));
-        }
+            var str = string.Empty;
 
+            if (ts != null && ts.Ticks > 0)
+            {
+                if (ts.Days > 0)
+                {
+                    str += string.Format("{0}{1} Days", !string.IsNullOrEmpty(str) ? " " : string.Empty, (int)ts.TotalDays);
+                }
+
+                if (ts.Hours > 0)
+                {
+                    str += string.Format("{0}{1} Hours", !string.IsNullOrEmpty(str) ? " " : string.Empty, ts.ToString("hh"));
+                }
+
+                str += string.Format("{0}{1} Minutes", !string.IsNullOrEmpty(str) ? " " : string.Empty, ts.ToString("mm"));
+                str += string.Format("{0}{1} Seconds", !string.IsNullOrEmpty(str) ? " " : string.Empty, ts.ToString("ss"));
+                str += string.Format("{0}{1} Miliseconds", !string.IsNullOrEmpty(str) ? " " : string.Empty, ts.ToString("ff"));
+            }
+
+            return str;
+        }
         public static string ToDigitalTimelyStandard(this TimeSpan ts)
         {
-            return ts == null || ts.Ticks == 0 ? string.Empty : string.Format("{0} : {1} : {2} : {3} : {4}", ts.ToString("dd"), ts.ToString("hh"), ts.ToString("mm"), ts.ToString("ss"), ts.ToString("ff"));
+            var str = string.Empty;
+
+            if (ts != null && ts.Ticks > 0)
+            {
+                if (ts.Hours > 0)
+                {
+                    str += string.Format("{0}{1}", !string.IsNullOrEmpty(str) ? " : " : string.Empty, (int)ts.TotalHours);
+                }
+
+                str += string.Format("{0}{1}", !string.IsNullOrEmpty(str) ? " : " : string.Empty, ts.ToString("mm"));
+                str += string.Format("{0}{1}", !string.IsNullOrEmpty(str) ? " : " : string.Empty, ts.ToString("ss"));
+                str += string.Format("{0}{1}", !string.IsNullOrEmpty(str) ? " : " : string.Empty, ts.ToString("ff"));
+            }
+
+            return str;
         }
 
         public static string IfNullOrEmptyShowAlternative(this string str, string alternativeStr)

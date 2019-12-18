@@ -153,9 +153,49 @@ namespace Timely.App.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap appbar_timer_pause {
+            get {
+                object obj = ResourceManager.GetObject("appbar.timer.pause", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap appbar_timer_resume {
+            get {
+                object obj = ResourceManager.GetObject("appbar.timer.resume", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap appbar_timer_rewind {
             get {
                 object obj = ResourceManager.GetObject("appbar.timer.rewind", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap appbar_timer_stop {
+            get {
+                object obj = ResourceManager.GetObject("appbar.timer.stop", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap timely_icon {
+            get {
+                object obj = ResourceManager.GetObject("timely-icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
