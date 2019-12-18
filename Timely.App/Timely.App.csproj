@@ -108,5 +108,26 @@
       <Name>Timely.Entities</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\appbar.delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\appbar.timer.check.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\appbar.timer.rewind.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\appbar.list.add.below.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\appbar.list.delete.inline.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\appbar.list.create.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\appbar.list.star.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

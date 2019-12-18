@@ -106,7 +106,7 @@ namespace Timely.App.Forms
             }
             else
             {
-                lblTaskDuration.Text = "No time";
+                lblTaskDuration.Text = "-";
             }
 
             lbTaskEventsHistory.DataSource = taskHistory;
