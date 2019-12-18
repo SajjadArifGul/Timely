@@ -57,38 +57,17 @@ namespace Timely.Data.Services
 
                 newContext.Entry(dbTask).CurrentValues.SetValues(task);
 
-                //newContext.Entry(task).State = System.Data.Entity.EntityState.Modified;
-
                 return newContext.SaveChanges() > 0;
             }
         }
 
         public bool DeleteTask(Entities.Task task)
         {
-            using (var newContext = new TimelyContext())
-            {
-                var dbTask = newContext.Tasks.Where(x => x.ID == task.ID).Include("EventsHistory").FirstOrDefault();
+            context.Events.RemoveRange(task.EventsHistory);
 
-                //newContext.Entry(dbTask).CurrentValues.SetValues(task);
+            context.Entry(task).State = EntityState.Deleted;
 
-                //newContext.Entry(dbTask.EventsHistory).State = System.Data.Entity.EntityState.Deleted;
-
-                //dbTask.EventsHistory.ForEach(x => newContext.Entry(x).State = System.Data.Entity.EntityState.Deleted);
-
-                foreach (var taskevent in dbTask.EventsHistory)
-                {
-                    newContext.Entry(taskevent).State = System.Data.Entity.EntityState.Deleted;
-                }
-
-                newContext.Entry(dbTask).State = System.Data.Entity.EntityState.Deleted;
-
-                return newContext.SaveChanges() > 0;
-            }
-
-            //context.Entry(task.EventsHistory).State = System.Data.Entity.EntityState.Deleted;
-            //context.Entry(task).State = System.Data.Entity.EntityState.Deleted;
-
-            //return context.SaveChanges() > 0;
+            return context.SaveChanges() > 0;
         }
     }
 }
