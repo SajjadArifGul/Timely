@@ -13,6 +13,11 @@ namespace Timely.App.Code
             return ts == null || ts.Ticks == 0 ? string.Empty : string.Format("{0} Days, {1} Hours, {2} Minutes, {3} Seconds", ts.ToString("dd"), ts.ToString("hh"), ts.ToString("mm"), ts.ToString("ss"));
         }
 
+        public static string ToDigitalTimelyStandard(this TimeSpan ts)
+        {
+            return ts == null || ts.Ticks == 0 ? string.Empty : string.Format("{0} : {1} : {2} : {3} : {4}", ts.ToString("dd"), ts.ToString("hh"), ts.ToString("mm"), ts.ToString("ss"), ts.ToString("ff"));
+        }
+
         public static string IfNullOrEmptyShowAlternative(this string str, string alternativeStr)
         {
             str = str.Trim();

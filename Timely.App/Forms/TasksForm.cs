@@ -246,5 +246,16 @@ namespace Timely.App.Forms
                 lblTaskDuration.Text = ts.ToTimelyStandard().IfNullOrEmptyShowAlternative("-");
             }
         }
+
+        private void lbTaskEventsHistory_DoubleClick(object sender, EventArgs e)
+        {
+            var selectedEvent = (Entities.Event)lbTaskEventsHistory.SelectedItem;
+
+            if (selectedEvent != null)
+            {
+                var eventForm = new EventForm(selectedEvent);
+                eventForm.Show();
+            }
+        }
     }
 }

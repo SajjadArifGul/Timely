@@ -191,6 +191,7 @@
             this.lbTaskEventsHistory.TabIndex = 11;
             this.infoToolTip.SetToolTip(this.lbTaskEventsHistory, "Event History of Task");
             this.lbTaskEventsHistory.SelectedIndexChanged += new System.EventHandler(this.lbTaskEventsHistory_SelectedIndexChanged);
+            this.lbTaskEventsHistory.DoubleClick += new System.EventHandler(this.lbTaskEventsHistory_DoubleClick);
             // 
             // label5
             // 
