@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,12 +34,12 @@ namespace Timely.Data.Services
 
         public List<Entities.Task> GetAll()
         {
-            return context.Tasks.OrderByDescending(x => x.CreatedOn).ToList();
+            return context.Tasks.Include("EventsHistory").OrderByDescending(x => x.CreatedOn).ToList();
         }
 
         public Entities.Task GetTaskByID(int ID)
         {
-            return context.Tasks.Find(ID);
+            return context.Tasks.Where(x=>x.ID == ID).Include("EventsHistory").FirstOrDefault();
         }
 
         public bool SaveTask(Entities.Task task)
@@ -64,9 +65,30 @@ namespace Timely.Data.Services
 
         public bool DeleteTask(Entities.Task task)
         {
-            context.Entry(task).State = System.Data.Entity.EntityState.Deleted;
+            using (var newContext = new TimelyContext())
+            {
+                var dbTask = newContext.Tasks.Where(x => x.ID == task.ID).Include("EventsHistory").FirstOrDefault();
 
-            return context.SaveChanges() > 0;
+                //newContext.Entry(dbTask).CurrentValues.SetValues(task);
+
+                //newContext.Entry(dbTask.EventsHistory).State = System.Data.Entity.EntityState.Deleted;
+
+                //dbTask.EventsHistory.ForEach(x => newContext.Entry(x).State = System.Data.Entity.EntityState.Deleted);
+
+                foreach (var taskevent in dbTask.EventsHistory)
+                {
+                    newContext.Entry(taskevent).State = System.Data.Entity.EntityState.Deleted;
+                }
+
+                newContext.Entry(dbTask).State = System.Data.Entity.EntityState.Deleted;
+
+                return newContext.SaveChanges() > 0;
+            }
+
+            //context.Entry(task.EventsHistory).State = System.Data.Entity.EntityState.Deleted;
+            //context.Entry(task).State = System.Data.Entity.EntityState.Deleted;
+
+            //return context.SaveChanges() > 0;
         }
     }
 }
