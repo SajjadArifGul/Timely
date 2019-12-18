@@ -331,6 +331,7 @@ namespace Timely.App.Forms
             this.Name = "TasksForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Timely - Time Tracking";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.TasksForm_FormClosed);
             this.Load += new System.EventHandler(this.TasksForm_Load);
             this.gbxTasksHolder.ResumeLayout(false);
             this.gbxTasksHolder.PerformLayout();

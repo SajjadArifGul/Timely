@@ -48,6 +48,16 @@ namespace Timely.App.Forms
             AppTimer.Start();
         }
 
+        protected internal Task<bool> GetReady()
+        {
+            return Task.Run(() =>
+            {
+                var allTasks = TasksService.Instance.GetAll();
+
+                return true;
+            });
+        }
+
         protected internal void LoadTasks(Entities.Task task = null)
         {
             var allTasks = TasksService.Instance.GetAll();
@@ -305,6 +315,11 @@ namespace Timely.App.Forms
                     LoadTasks(SelectedTask);
                 }
             }
+        }
+
+        private void TasksForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
