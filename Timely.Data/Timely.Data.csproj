@@ -59,8 +59,13 @@
     <Compile Include="Migrations\201912170945033_taskCreatedOn.designer.cs">
       <DependentUpon>201912170945033_taskCreatedOn.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912180256118_taskEventID.cs" />
+    <Compile Include="Migrations\201912180256118_taskEventID.designer.cs">
+      <DependentUpon>201912180256118_taskEventID.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\EventsService.cs" />
     <Compile Include="Services\TasksService.cs" />
     <Compile Include="TimelyContext.cs" />
   </ItemGroup>
@@ -80,6 +85,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912170945033_taskCreatedOn.resx">
       <DependentUpon>201912170945033_taskCreatedOn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912180256118_taskEventID.resx">
+      <DependentUpon>201912180256118_taskEventID.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

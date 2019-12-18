@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Timely.App.Code;
 using Timely.Data.Services;
 
 namespace Timely.App.Forms
@@ -14,6 +16,7 @@ namespace Timely.App.Forms
     public partial class TasksForm : Form
     {
         private Entities.Task SelectedTask = null;
+        private Entities.Event SelectedEvent = null;
 
         public TasksForm()
         {
@@ -23,6 +26,8 @@ namespace Timely.App.Forms
         private void TasksForm_Load(object sender, EventArgs e)
         {
             LoadTasks();
+
+            AppTimer.Start();
         }
 
         private void LoadTasks(Entities.Task task = null)
@@ -100,14 +105,7 @@ namespace Timely.App.Forms
 
             var ts = TimeSpan.FromTicks(taskHistory.Sum(x => x.Ticks));
 
-            if (ts.Ticks > 0)
-            {
-                lblTaskDuration.Text = string.Format("{0} Days, {1} Hours, {2} Minutes, {3} Seconds", ts.ToString("dd"), ts.ToString("hh"), ts.ToString("mm"), ts.ToString("ss"));
-            }
-            else
-            {
-                lblTaskDuration.Text = "-";
-            }
+            lblTaskDuration.Text = ts.ToTimelyStandard().IfNullOrEmptyShowAlternative("-");
 
             lbTaskEventsHistory.DataSource = taskHistory;
             lbTaskEventsHistory.DisplayMember = "StartTime";
@@ -122,6 +120,8 @@ namespace Timely.App.Forms
             }
             else
             {
+                SelectedEvent = null;
+
                 lbTaskEventsHistory.Enabled = false;
                 btnDeleteEvent.Enabled = false;
             }
@@ -196,6 +196,55 @@ namespace Timely.App.Forms
         private bool ValidateTask(Entities.Task task)
         {
             return !string.IsNullOrEmpty(task.Name);
+        }
+
+        private void btnStartNewEvent_Click(object sender, EventArgs e)
+        {
+            var newEvent = new Entities.Event() { TaskID = SelectedTask.ID, StartTime = DateTime.Now, Status = Entities.EventStatus.Started };
+
+            if(SelectedTask.EventsHistory == null)
+            {
+                SelectedTask.EventsHistory = new List<Entities.Event>();
+            }
+
+            SelectedTask.EventsHistory.Add(newEvent);
+            
+            var result = EventsService.Instance.SaveEvent(newEvent);
+
+            if (!result)
+            {
+                ShowErrorMessage("Unable to add event.");
+            }
+            else
+            {
+                //Load Tasks again
+                LoadTasks(SelectedTask);
+            }
+        }
+
+        private void lbTaskEventsHistory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var selectedEvent = (Entities.Event)lbTaskEventsHistory.SelectedItem;
+
+            if (selectedEvent != null)
+            {
+                SelectedEvent = selectedEvent;
+                btnDeleteEvent.Enabled = true;
+            }
+            else
+            {
+                SelectedEvent = null;
+                btnDeleteEvent.Enabled = false;
+            }
+        }
+        
+        private void AppTimer_Tick(object sender, EventArgs e)
+        {
+            if(SelectedEvent != null && SelectedEvent.Status == Entities.EventStatus.Started)
+            {
+                var ts = DateTime.Now - SelectedEvent.StartTime;
+                lblTaskDuration.Text = ts.ToTimelyStandard().IfNullOrEmptyShowAlternative("-");
+            }
         }
     }
 }
