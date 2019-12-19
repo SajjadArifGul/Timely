@@ -16,11 +16,7 @@ namespace Timely.App.Forms
     public partial class TasksForm : FormBase
     {
         protected internal List<Entities.Task> Tasks = null;
-
-
-        private Entities.Task SelectedTask = null;
-        private Entities.Event SelectedEvent = null;
-
+        
         #region Define as Singleton
         private static TasksForm _Instance;
 
@@ -43,8 +39,7 @@ namespace Timely.App.Forms
             this.Icon = new Icon("Resources/timely-icon.ico");
         }
         #endregion
-
-
+        
         #region Form Events
         private void TasksForm_Load(object sender, EventArgs e)
         {
@@ -126,9 +121,17 @@ namespace Timely.App.Forms
 
         private void btnDeleteTask_Click(object sender, EventArgs e)
         {
+            var selectedTask = (Entities.Task)lbTasksList.SelectedItem;
+
+            if (selectedTask == null)
+            {
+                LoadTaskDetails(selectedTask);
+                return;
+            }
+
             if (ShowConfirmMessage("Are you sure you want to delete this task?") == DialogResult.OK)
             {
-                var result = TasksService.Instance.DeleteTask(SelectedTask);
+                var result = TasksService.Instance.DeleteTask(selectedTask);
 
                 if (!result)
                 {
@@ -192,9 +195,10 @@ namespace Timely.App.Forms
 
                 selectedTask.EventsHistory.Remove(selectedTaskEvent);
 
-                var result = TasksService.Instance.UpdateTask(selectedTask);
+                var resultDeleteEvent = EventsService.Instance.DeleteEvent(selectedEvent);
+                //var result = TasksService.Instance.UpdateTask(selectedTask);
 
-                if (!result)
+                if (!resultDeleteEvent)// || !result)
                 {
                     ShowErrorMessage("Unable to delete event.");
                 }
@@ -203,6 +207,38 @@ namespace Timely.App.Forms
                     //reload task details
                     LoadTaskDetails(selectedTask);
                 }
+            }
+        }
+        private void lbTaskEventsHistory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var selectedEvent = (Entities.Event)lbTaskEventsHistory.SelectedItem;
+
+            if (selectedEvent != null)
+            {
+                btnDeleteEvent.Enabled = true;
+            }
+            else
+            {
+                btnDeleteEvent.Enabled = false;
+            }
+        }
+
+        private void lbTaskEventsHistory_DoubleClick(object sender, EventArgs e)
+        {
+            var selectedTask = (Entities.Task)lbTasksList.SelectedItem;
+
+            if (selectedTask == null)
+            {
+                LoadTaskDetails(selectedTask);
+                return;
+            }
+
+            var selectedEvent = (Entities.Event)lbTaskEventsHistory.SelectedItem;
+
+            if (selectedEvent != null)
+            {
+                var eventForm = new EventForm(selectedTask, selectedEvent.ID);
+                eventForm.Show();
             }
         }
 
@@ -231,15 +267,14 @@ namespace Timely.App.Forms
             }
         }
 
+        private void TasksForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
+
         #endregion
 
         #region Functions
-
-
-        #endregion
-
-
-
         protected internal void ReloadTasks()
         {
             Tasks = TasksService.Instance.GetAll();
@@ -256,9 +291,9 @@ namespace Timely.App.Forms
                 lbTasksList.DisplayMember = "Name";
                 lbTasksList.ValueMember = "ID";
 
-                if(selectedID > 0)
+                if (selectedID > 0)
                 {
-                    lbTasksList.SelectedItem = tasks.FirstOrDefault(x=>x.ID == selectedID);
+                    lbTasksList.SelectedItem = tasks.FirstOrDefault(x => x.ID == selectedID);
                 }
             }
             else
@@ -266,6 +301,7 @@ namespace Timely.App.Forms
                 lbTasksList.DataSource = null;
             }
         }
+
         private void UpdateEventsListBoxSource(List<Entities.Event> _events, int selectedID = 0)
         {
             if (_events != null && _events.Count > 0)
@@ -274,22 +310,23 @@ namespace Timely.App.Forms
                 eventsSource.DataSource = _events;
 
                 lbTaskEventsHistory.DataSource = eventsSource;
-                lbTaskEventsHistory.DisplayMember = "StartTime";
+                lbTaskEventsHistory.DisplayMember = "Name";
                 lbTaskEventsHistory.ValueMember = "ID";
 
                 if (selectedID > 0)
                 {
                     lbTaskEventsHistory.SelectedItem = _events.FirstOrDefault(x => x.ID == selectedID);
                 }
+
             }
             else
             {
                 lbTaskEventsHistory.DataSource = null;
+                btnDeleteEvent.Enabled = false;
             }
         }
-        
 
-        private void LoadTaskDetails(Entities.Task task)
+        protected internal void LoadTaskDetails(Entities.Task task)
         {
             if (task != null)
             {
@@ -317,44 +354,15 @@ namespace Timely.App.Forms
             else
             {
                 gbTaskDetailsHolder.Enabled = false;
+                txtTaskName.Clear();
+                txtTaskDescription.Clear();
+                lblTaskDuration.Text = string.Empty;
+
+                UpdateEventsListBoxSource(null);
             }
         }
 
-
+        #endregion
         
-
-
-        private void lbTaskEventsHistory_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            var selectedEvent = (Entities.Event)lbTaskEventsHistory.SelectedItem;
-
-            if (selectedEvent != null)
-            {
-                SelectedEvent = selectedEvent;
-                btnDeleteEvent.Enabled = true;
-            }
-            else
-            {
-                SelectedEvent = null;
-                btnDeleteEvent.Enabled = false;
-            }
-        }
-        
-
-        private void lbTaskEventsHistory_DoubleClick(object sender, EventArgs e)
-        {
-            var selectedEvent = (Entities.Event)lbTaskEventsHistory.SelectedItem;
-
-            if (selectedEvent != null)
-            {
-                var eventForm = new EventForm(selectedEvent);
-                eventForm.Show();
-            }
-        }
-        
-        private void TasksForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Application.Exit();
-        }
     }
 }

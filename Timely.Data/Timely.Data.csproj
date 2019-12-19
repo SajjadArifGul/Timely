@@ -65,6 +65,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ContextHolder.cs" />
     <Compile Include="Services\EventsService.cs" />
     <Compile Include="Services\TasksService.cs" />
     <Compile Include="TimelyContext.cs" />

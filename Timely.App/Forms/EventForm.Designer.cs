@@ -32,9 +32,9 @@
             this.EventTimer = new System.Windows.Forms.Timer(this.components);
             this.lblTime = new System.Windows.Forms.Label();
             this.lblDetailedTime = new System.Windows.Forms.Label();
-            this.btnResumeEvent = new System.Windows.Forms.Button();
             this.btnStopEvent = new System.Windows.Forms.Button();
             this.btnDeleteEvent = new System.Windows.Forms.Button();
+            this.AppInfoToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // EventTimer
@@ -68,22 +68,6 @@
             this.lblDetailedTime.Text = "00 : 00 : 00 : 00";
             this.lblDetailedTime.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // btnResumeEvent
-            // 
-            this.btnResumeEvent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnResumeEvent.BackColor = System.Drawing.Color.LimeGreen;
-            this.btnResumeEvent.BackgroundImage = global::Timely.App.Properties.Resources.appbar_timer_resume;
-            this.btnResumeEvent.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnResumeEvent.FlatAppearance.BorderColor = System.Drawing.Color.LimeGreen;
-            this.btnResumeEvent.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnResumeEvent.Location = new System.Drawing.Point(240, 113);
-            this.btnResumeEvent.Margin = new System.Windows.Forms.Padding(4);
-            this.btnResumeEvent.Name = "btnResumeEvent";
-            this.btnResumeEvent.Size = new System.Drawing.Size(35, 35);
-            this.btnResumeEvent.TabIndex = 17;
-            this.btnResumeEvent.UseVisualStyleBackColor = false;
-            this.btnResumeEvent.Click += new System.EventHandler(this.btnResumeEvent_Click);
-            // 
             // btnStopEvent
             // 
             this.btnStopEvent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -92,11 +76,12 @@
             this.btnStopEvent.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnStopEvent.FlatAppearance.BorderColor = System.Drawing.Color.LimeGreen;
             this.btnStopEvent.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnStopEvent.Location = new System.Drawing.Point(197, 113);
+            this.btnStopEvent.Location = new System.Drawing.Point(218, 113);
             this.btnStopEvent.Margin = new System.Windows.Forms.Padding(4);
             this.btnStopEvent.Name = "btnStopEvent";
             this.btnStopEvent.Size = new System.Drawing.Size(35, 35);
             this.btnStopEvent.TabIndex = 16;
+            this.AppInfoToolTip.SetToolTip(this.btnStopEvent, "Stop this event");
             this.btnStopEvent.UseVisualStyleBackColor = false;
             this.btnStopEvent.Click += new System.EventHandler(this.btnStopEvent_Click);
             // 
@@ -106,14 +91,14 @@
             this.btnDeleteEvent.BackColor = System.Drawing.Color.Salmon;
             this.btnDeleteEvent.BackgroundImage = global::Timely.App.Properties.Resources.appbar_timer_rewind;
             this.btnDeleteEvent.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnDeleteEvent.Enabled = false;
             this.btnDeleteEvent.FlatAppearance.BorderColor = System.Drawing.Color.Salmon;
             this.btnDeleteEvent.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDeleteEvent.Location = new System.Drawing.Point(154, 113);
+            this.btnDeleteEvent.Location = new System.Drawing.Point(175, 113);
             this.btnDeleteEvent.Margin = new System.Windows.Forms.Padding(4);
             this.btnDeleteEvent.Name = "btnDeleteEvent";
             this.btnDeleteEvent.Size = new System.Drawing.Size(35, 35);
             this.btnDeleteEvent.TabIndex = 15;
+            this.AppInfoToolTip.SetToolTip(this.btnDeleteEvent, "Delete this event");
             this.btnDeleteEvent.UseVisualStyleBackColor = false;
             this.btnDeleteEvent.Click += new System.EventHandler(this.btnDeleteEvent_Click);
             // 
@@ -123,7 +108,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(428, 161);
-            this.Controls.Add(this.btnResumeEvent);
             this.Controls.Add(this.btnStopEvent);
             this.Controls.Add(this.btnDeleteEvent);
             this.Controls.Add(this.lblDetailedTime);
@@ -149,6 +133,6 @@
         private System.Windows.Forms.Label lblDetailedTime;
         private System.Windows.Forms.Button btnStopEvent;
         private System.Windows.Forms.Button btnDeleteEvent;
-        private System.Windows.Forms.Button btnResumeEvent;
+        private System.Windows.Forms.ToolTip AppInfoToolTip;
     }
 }
