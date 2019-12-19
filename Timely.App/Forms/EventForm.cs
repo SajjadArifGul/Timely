@@ -87,7 +87,7 @@ namespace Timely.App.Forms
             }
             else
             {
-                TasksForm.Instance.LoadTasks();
+                //TasksForm.Instance.LoadTasks();
             }
         }
     }

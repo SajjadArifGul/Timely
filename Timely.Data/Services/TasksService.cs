@@ -39,6 +39,16 @@ namespace Timely.Data.Services
             return context.Tasks.OrderByDescending(x => x.CreatedOn).ToList();
         }
 
+        public Task<List<Entities.Task>> GetAllAsync()
+        {
+            return Task.Run(() =>
+            {
+                context = new TimelyContext();
+
+                return context.Tasks.OrderByDescending(x => x.CreatedOn).ToList();
+            });
+        }
+
         public Entities.Task GetTaskByID(int ID)
         {
             return context.Tasks.Where(x=>x.ID == ID).Include("EventsHistory").FirstOrDefault();
@@ -53,14 +63,17 @@ namespace Timely.Data.Services
 
         public bool UpdateTask(Entities.Task task)
         {
-            using (var newContext = new TimelyContext())
-            {
-                var dbTask = newContext.Tasks.Find(task.ID);
+            context.Entry(task).State = EntityState.Modified;
+            return context.SaveChanges() > 0;
 
-                newContext.Entry(dbTask).CurrentValues.SetValues(task);
+            //using (var newContext = new TimelyContext())
+            //{
+            //    var dbTask = newContext.Tasks.Find(task.ID);
 
-                return newContext.SaveChanges() > 0;
-            }
+            //    newContext.Entry(dbTask).CurrentValues.SetValues(task);
+
+            //    return newContext.SaveChanges() > 0;
+            //}
         }
 
         public bool DeleteTask(Entities.Task task)

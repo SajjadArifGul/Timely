@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Timely.Data.Services;
 
 namespace Timely.App.Forms
 {
@@ -19,13 +20,10 @@ namespace Timely.App.Forms
 
         private async void LoaderForm_Load(object sender, EventArgs e)
         {
-            var result = await TasksForm.Instance.GetReady();
+            TasksForm.Instance.Tasks = await TasksService.Instance.GetAllAsync();
 
-            if(result)
-            {
-                this.Hide();
-                TasksForm.Instance.ShowDialog();
-            }
+            this.Hide();
+            TasksForm.Instance.ShowDialog();
         }
     }
 }

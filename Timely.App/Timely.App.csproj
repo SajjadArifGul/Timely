@@ -47,6 +47,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Code\Extensions.cs" />
+    <Compile Include="Code\FormBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Code\Validators.cs" />
     <Compile Include="Forms\AppForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -187,6 +191,9 @@
     <None Include="Resources\timely-icon.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
