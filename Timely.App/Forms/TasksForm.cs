@@ -237,8 +237,16 @@ namespace Timely.App.Forms
 
             if (selectedEvent != null)
             {
-                var eventForm = new EventForm(selectedTask, selectedEvent.ID);
-                eventForm.Show();
+                if(selectedEvent.Status == Entities.EventStatus.Started)
+                {
+                    var eventForm = new EventForm(selectedTask, selectedEvent.ID);
+                    eventForm.Show();
+                }
+                else
+                {
+                    var eventDetailsForm = new EventDetailsForm(selectedTask, selectedEvent.ID);
+                    eventDetailsForm.Show();
+                }
             }
         }
 
