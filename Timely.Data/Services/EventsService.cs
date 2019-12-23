@@ -9,7 +9,7 @@ namespace Timely.Data.Services
 {
     public class EventsService
     {
-        TimelyContext context = new TimelyContext();
+        TimelyContext context = null;
 
         #region Define as Singleton
         private static EventsService _Instance;
@@ -29,6 +29,7 @@ namespace Timely.Data.Services
 
         private EventsService()
         {
+            context = ContextHolder.Instance.TimelyContext();
         }
         #endregion
 

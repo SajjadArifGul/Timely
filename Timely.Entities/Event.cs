@@ -21,10 +21,42 @@ namespace Timely.Entities
             get {
                 var str = string.Empty;
 
-                str = string.Format("{0} - {1}", StartTime.ToString(), Status.ToString());
+                if(Status == EventStatus.Stopped && EndTime.HasValue)
+                {
+                    var timeSpan = EndTime.Value - StartTime;
+                    str = string.Format("{0} - {1}", StartTime.ToString(), timeSpan.ToTimelyStandard());
+                }
+                else str = string.Format("{0} - {1}", StartTime.ToString(), Status.ToString());
 
                 return str;
             }
+        }
+    }
+
+    public static class Extensions
+    {
+        public static string ToTimelyStandard(this TimeSpan ts)
+        {
+            var str = string.Empty;
+
+            if (ts != null && ts.Ticks > 0)
+            {
+                if (ts.Days > 0)
+                {
+                    str += string.Format("{0}{1} Days", !string.IsNullOrEmpty(str) ? " " : string.Empty, (int)ts.TotalDays);
+                }
+
+                if (ts.Hours > 0)
+                {
+                    str += string.Format("{0}{1} Hours", !string.IsNullOrEmpty(str) ? " " : string.Empty, ts.ToString("hh"));
+                }
+
+                str += string.Format("{0}{1} Minutes", !string.IsNullOrEmpty(str) ? " " : string.Empty, ts.ToString("mm"));
+                str += string.Format("{0}{1} Seconds", !string.IsNullOrEmpty(str) ? " " : string.Empty, ts.ToString("ss"));
+                str += string.Format("{0}{1} Miliseconds", !string.IsNullOrEmpty(str) ? " " : string.Empty, ts.ToString("ff"));
+            }
+
+            return str;
         }
     }
 }

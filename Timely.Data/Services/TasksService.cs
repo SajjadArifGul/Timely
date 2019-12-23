@@ -9,7 +9,7 @@ namespace Timely.Data.Services
 {
     public class TasksService
     {
-        TimelyContext context = new TimelyContext();
+        TimelyContext context = null;
 
         #region Define as Singleton
         private static TasksService _Instance;
@@ -29,6 +29,7 @@ namespace Timely.Data.Services
 
         private TasksService()
         {
+            context = ContextHolder.Instance.TimelyContext();
         }
         #endregion
 
