@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timely.Entities", "Timely.E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timely.Data", "Timely.Data\Timely.Data.csproj", "{D8D99EE9-E38F-466B-A077-8BBB71411FBB}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Timely.Setup", "Timely.Setup\Timely.Setup.vdproj", "{325C830F-4550-4DB8-AC36-6BB511E314E2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,8 @@ Global
 		{D8D99EE9-E38F-466B-A077-8BBB71411FBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D8D99EE9-E38F-466B-A077-8BBB71411FBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D8D99EE9-E38F-466B-A077-8BBB71411FBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{325C830F-4550-4DB8-AC36-6BB511E314E2}.Debug|Any CPU.ActiveCfg = Debug
+		{325C830F-4550-4DB8-AC36-6BB511E314E2}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
